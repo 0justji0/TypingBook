@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; // 리액트 라이브러리와 훅을 임포트
 import './App.css'; // CSS 파일 임포트
 import theLittlePrince from './Book/the_little_prince.txt'; // 텍스트 파일을 임포트
+//되나
 
 // 타이핑 게임에 사용할 단어 리스트
 const words = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape', 'honeydew'];
