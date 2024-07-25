@@ -17,13 +17,19 @@ function App() {
     const [typedText, setTypedText] = useState('');
     const [inputText, setInputText] = useState('');
     const maxMistakes = 6;
+    const [countdown, setCountdown] = useState(null);
+    const [isWordGuessed, setIsWordGuessed] = useState(false);
 
     const hangmanWords = [
         { word: 'javascript', hint: 'A popular programming language.' },
         { word: 'hangman', hint: 'A classic word guessing game.' },
         { word: 'coding', hint: 'Writing instructions for computers.' },
         { word: 'developer', hint: 'A person who creates software.' },
-        { word: 'computer', hint: 'An electronic device for storing and processing data.' }
+        { word: 'computer', hint: 'An electronic device for storing and processing data.' },
+        { word: 'kimhayoon', hint: '대한민국에서 제일 많은 성, 가장 낮은 단계, 파도에 햇빛이 일렁일렁 비치는거의 앞글자' },
+        { word: 'yiminji', hint: '숫자 2, 여자 중에 흔한 이름' },
+        { word: 'parkjonghyo', hint: '흥부가 뭘 갈라서 부자가 됐음, 1월1일이 될 때 치는거, 부모에게 해야하는 것' },
+        { word: 'tom n jerry', hint: 'MJ favorite game' }
     ];
 
     useEffect(() => {
@@ -44,6 +50,24 @@ function App() {
                 .then(text => setBookText(text));
         }
     }, [gameMode]);
+
+    useEffect(() => {
+        if (isWordGuessed) {
+            let counter = 5;
+            setCountdown(counter);
+            const interval = setInterval(() => {
+                counter -= 1;
+                setCountdown(counter);
+                if (counter === 0) {
+                    clearInterval(interval);
+                    startHangmanGame();
+                    setCountdown(null);
+                    setIsWordGuessed(false);
+                }
+            }, 1000);
+            return () => clearInterval(interval);
+        }
+    }, [isWordGuessed]);
 
     const startGame = () => {
         setGameMode('typing');
@@ -138,12 +162,20 @@ function App() {
         const word = fallingWords[0].word;
         const hint = fallingWords[0].hint;
         const displayWord = word.split('').map(letter => guessedLetters.includes(letter) ? letter : '_').join(' ');
+
+        // 모든 글자를 맞췄는지 확인
+        const wordGuessed = word.split('').every(letter => guessedLetters.includes(letter));
+        if (wordGuessed && !isWordGuessed) {
+            setIsWordGuessed(true);
+        }
+
         return (
             <div>
                 <p>{displayWord}</p>
                 <p>Hint: {hint}</p>
                 <p>Mistakes: {mistakes}/{maxMistakes}</p>
                 <pre>{drawHangman()}</pre>
+                {wordGuessed && <p>정답입니다! {countdown}초 뒤에 다음 문제가 출제됩니다!</p>} {/* 정답 알림 및 카운트다운 표시 */}
             </div>
         );
     };
