@@ -6,6 +6,7 @@ import theLittlePrince from './Book/the_little_prince.txt'; // 텍스트 파일�
 //1
 //2
 //3
+//4
 
 // 타이핑 게임에 사용할 단어 리스트
 const words = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape', 'honeydew'];
