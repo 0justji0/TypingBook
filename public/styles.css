@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+#gameArea, #hangmanArea {
+    display: none;
+    position: relative;
+    height: 80vh;
+    border: 1px solid #000;
+    margin: 20px;
+    overflow: auto;
+}
+
+.falling-word {
+    position: absolute;
+    top: 0;
+    font-size: 24px;
+    color: red;
+}
+
+#inputArea, #hangmanInputArea {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 10vh;
+}
+
+#wordInput, #hangmanInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#gameOverMessage {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 24px;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+#startButton, #hangmanButton, #backButton {
+    font-size: 24px;
+    padding: 10px 20px;
+    margin-top: 50px;
+}
+
+#backButton {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
